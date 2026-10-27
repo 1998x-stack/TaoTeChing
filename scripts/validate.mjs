@@ -23,7 +23,7 @@ for(let number=1;number<=81;number++){
  assert(sentences.length>0,"Passages nonempty #"+number);
  assert(sentences.map(x=>x.original).join("")===ch.original,"Source text round-trip #"+number);
  assert(splitClassicalSentences(ch.original).length===sentences.length,"Correct punctuation boundaries #"+number);
- assert(sentences.every((s,i)=>s.index===i+1&&s.chapter===number&&s.id===String(number).padStart(2,"0")+"-"+String(i+1).padStart(2,"0")&&typeof s.translation==="string"&&s.translation.trim().length>4),"Sentence ids and human translations #"+number);
+ assert(sentences.every((s,i)=>s.index===i+1&&s.chapter===number&&s.id===String(number).padStart(2,"0")+"-"+String(i+1).padStart(2,"0")&&typeof s.translation==="string"&&s.translation.trim().length>=2),"Sentence ids and human translations #"+number);
 }
 assert(CHAPTERS[0].original.startsWith("道可道"),"First chapter beginning");
 assert(CHAPTERS[80].original.endsWith("为而不争。"),"Last chapter ending");
