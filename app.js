@@ -130,8 +130,7 @@ function navigate(number,scrollToReader){
  if(scrollToReader)$("reading").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});
 }
 document.querySelectorAll(".part-switch button").forEach(button=>button.addEventListener("click",()=>{
- state.part=button.dataset.part;
- renderNav();
+ navigate(button.dataset.part==="dao"?1:38,false);
 }));
 document.querySelectorAll(".view-modes button").forEach(button=>button.addEventListener("click",()=>{
  state.mode=button.dataset.mode;storage.write("mode",state.mode);renderChapter();

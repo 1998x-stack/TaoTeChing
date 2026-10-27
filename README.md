@@ -6,7 +6,7 @@
 [![Pages](https://github.com/1998x-stack/TaoTeChing/actions/workflows/pages.yml/badge.svg)](https://github.com/1998x-stack/TaoTeChing/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/code-MIT-c7ac78)](./LICENSE)
 
-**[在线阅读 / Live site](https://1998x-stack.github.io/TaoTeChing/)** · **[专业文档 / Documentation](./docs/README.md)** · **[内容与版本说明](./docs/TEXTUAL-CRITICISM.md)**
+**[预定阅读网址（Pages 需先启用）](https://1998x-stack.github.io/TaoTeChing/)** · **[专业文档 / Documentation](./docs/README.md)** · **[内容与版本说明](./docs/TEXTUAL-CRITICISM.md)**
 
 > 道可道，非常道。名可名，非常名。
 >

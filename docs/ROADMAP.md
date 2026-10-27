@@ -8,7 +8,8 @@
 - [x] 81 章数据模型和基础自动检测
 - [x] README / CONTRIBUTING / 许可证说明
 - [x] CI 和 Pages 的声明式 workflow
-- [ ] 确认 CI 全部通过，网站实际可访问
+- [x] 已确认 CI 全部通过
+- [ ] 网站实际可访问（需启用仓库 GitHub Pages）
 
 **验收：** 文件齐全，npm test 通过，GitHub Actions 的结果为 success。
 
