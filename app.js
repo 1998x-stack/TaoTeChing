@@ -1,4 +1,5 @@
 import { CHAPTERS, THEMES, byNumber } from "./data/chapters.js";
+import { byChapter } from "./data/passages.js";
 
 /* A framework-free, accessible reader. User preferences never leave this browser. */
 const $ = id => document.getElementById(id);
@@ -9,13 +10,11 @@ const storage = {
 const state = {
  current:Math.max(1,Math.min(81,Number(location.hash.match(/^#chapter-(\d+)$/)?.[1]) || storage.read("last",1))),
  part:"dao",
- mode:storage.read("mode","parallel"),
  size:storage.read("size",20),
  bookmarks:storage.read("bookmarks",[]),
  query:"",
  theme:""
 };
-if(!["parallel","original","translation"].includes(state.mode))state.mode="parallel";
 if(!Array.isArray(state.bookmarks))state.bookmarks=[];
 state.size=Number.isFinite(state.size)?Math.max(16,Math.min(28,state.size)):20;
 const digits=["零","一","二","三","四","五","六","七","八","九"];
@@ -96,6 +95,44 @@ function renderNav(){
   else nav.scrollLeft=Math.max(0,active.offsetLeft-nav.offsetLeft-nav.clientWidth/2);
  }
 }
+function updateRevealCount(){
+ const total=$("reader-lines").querySelectorAll(".sentence-card").length;
+ const open=$("reader-lines").querySelectorAll('.reveal-button[aria-expanded="true"]').length;
+ $("reveal-count").textContent="已读 "+open+" / "+total+" 句";
+}
+function revealSentence(button,translation){
+ const visible=button.getAttribute("aria-expanded")==="true";
+ button.setAttribute("aria-expanded",String(!visible));
+ translation.hidden=visible;
+ button.textContent=visible?"轻触见译 ＋":"收起此句译文 −";
+ button.closest(".sentence-card").classList.toggle("revealed",!visible);
+ updateRevealCount();
+}
+function renderSentences(chapter){
+ const fragment=document.createDocumentFragment();
+ for(const passage of byChapter(chapter.number)){
+  const card=create("article","sentence-card");
+  card.setAttribute("role","listitem");
+  card.dataset.sentenceId=passage.id;
+  const marker=create("div","sentence-marker");
+  marker.append(create("span",null,"句 "+String(passage.index).padStart(2,"0")),create("span",null,"原典 · ORIGINAL"));
+  const source=create("p","classical-sentence",passage.original);
+  const reveal=create("button","reveal-button","轻触见译 ＋");
+  reveal.type="button";
+  reveal.setAttribute("aria-expanded","false");
+  reveal.setAttribute("aria-controls","translation-"+passage.id);
+  reveal.setAttribute("aria-label","第"+passage.index+"句，点击揭晓白话译文");
+  const translation=create("div","sentence-meaning");
+  translation.id="translation-"+passage.id;
+  translation.hidden=true;
+  translation.append(create("span","meaning-label","白话译文 · INTERPRETATION"),create("p","meaning-text",passage.translation));
+  reveal.addEventListener("click",()=>revealSentence(reveal,translation));
+  card.append(marker,source,reveal,translation);
+  fragment.append(card);
+ }
+ $("reader-lines").replaceChildren(fragment);
+ updateRevealCount();
+}
 function renderChapter(){
  const ch=byNumber(state.current);if(!ch)return;
  state.part=ch.number<=37?"dao":"de";
@@ -104,15 +141,9 @@ function renderChapter(){
  $("chapter-title").textContent=ch.title;
  $("chapter-large").textContent=String(ch.number).padStart(2,"0");
  $("sidebar-count").textContent=String(ch.number).padStart(2,"0")+" / 81";
- $("original-text").textContent=ch.original;
- $("translation-text").textContent=ch.translation;
+ renderSentences(ch);
  $("reader-tags").replaceChildren(create("span",null,ch.theme),create("span",null,state.part==="dao"?"道经":"德经"));
- $("reader-columns").dataset.mode=state.mode;
  document.documentElement.style.setProperty("--reader-size",state.size+"px");
- document.querySelectorAll(".view-modes button").forEach(btn=>{
-  const active=btn.dataset.mode===state.mode;
-  btn.classList.toggle("active",active);btn.setAttribute("aria-pressed",String(active));
- });
  const bookmarked=state.bookmarks.includes(ch.number);
  $("bookmark-toggle").setAttribute("aria-pressed",String(bookmarked));
  $("bookmark-toggle").textContent=bookmarked?"★ 已收藏":"☆ 收藏本章";
@@ -132,11 +163,8 @@ function navigate(number,scrollToReader){
 document.querySelectorAll(".part-switch button").forEach(button=>button.addEventListener("click",()=>{
  navigate(button.dataset.part==="dao"?1:38,false);
 }));
-document.querySelectorAll(".view-modes button").forEach(button=>button.addEventListener("click",()=>{
- state.mode=button.dataset.mode;storage.write("mode",state.mode);renderChapter();
-}));
-$("font-larger").addEventListener("click",()=>{state.size=Math.min(28,state.size+2);storage.write("size",state.size);renderChapter()});
-$("font-smaller").addEventListener("click",()=>{state.size=Math.max(16,state.size-2);storage.write("size",state.size);renderChapter()});
+$("font-larger").addEventListener("click",()=>{state.size=Math.min(28,state.size+2);storage.write("size",state.size);document.documentElement.style.setProperty("--reader-size",state.size+"px")});
+$("font-smaller").addEventListener("click",()=>{state.size=Math.max(16,state.size-2);storage.write("size",state.size);document.documentElement.style.setProperty("--reader-size",state.size+"px")});
 $("prev-chapter").addEventListener("click",()=>navigate(state.current-1,false));
 $("next-chapter").addEventListener("click",()=>navigate(state.current+1,false));
 $("bookmark-toggle").addEventListener("click",()=>{
@@ -146,10 +174,12 @@ $("bookmark-toggle").addEventListener("click",()=>{
  toast(state.bookmarks.includes(state.current)?"已加入书签":"已取消书签");
 });
 $("copy-link").addEventListener("click",()=>copy(new URL("#chapter-"+state.current,location.href).href,"链接已复制"));
-document.querySelectorAll(".copy-btn").forEach(btn=>btn.addEventListener("click",()=>{
- const chapter=byNumber(state.current);
- copy(btn.dataset.copy==="original"?chapter.original:chapter.translation,btn.dataset.copy==="original"?"原文已复制":"译文已复制");
-}));
+$("collapse-all").addEventListener("click",()=>{
+ $("reader-lines").querySelectorAll('.reveal-button[aria-expanded="true"]').forEach(button=>{
+  const target=document.getElementById(button.getAttribute("aria-controls"));
+  revealSentence(button,target);
+ });
+});
 $("chapter-search").addEventListener("input",event=>{state.query=event.target.value;renderLibrary()});
 filter.addEventListener("change",event=>{state.theme=event.target.value;renderLibrary()});
 document.querySelectorAll(".theme-jump").forEach(button=>button.addEventListener("click",()=>{
