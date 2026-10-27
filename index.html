@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101816">
+<meta name="description" content="《道德经》八十一章。原文与白话意译对照，沉浸式东方美学阅读、搜索、书签、主题漫游。">
+<meta property="og:title" content="道德经 | Tao Te Ching"><meta property="og:description" content="五千言，八十一章。以当代方式重新阅读古老智慧。">
+<meta property="og:image" content="./assets/og-cover.svg">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg"><link rel="stylesheet" href="./styles.css">
+<title>道德经 · Tao Te Ching | 在无声处，见万物</title>
+</head>
+<body>
+<a class="skip-link" href="#reading">跳至正文</a>
+<div id="scroll-progress" class="reading-progress" aria-hidden="true"></div>
+<header class="site-header" id="top">
+<a class="brand" href="#top"><span class="brand-mark">道</span><span>道德经<small>TAO TE CHING</small></span></a>
+<nav aria-label="主导航" class="top-nav"><a href="#philosophy">道之观</a><a href="#library">八十一章</a><a href="#reading">静心阅读</a></nav>
+<div class="header-actions"><button id="theme-toggle" class="icon-button" aria-label="切换明暗外观" title="切换明暗外观">☼</button><a class="github-link" href="https://github.com/1998x-stack/TaoTeChing" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+</header>
+<main>
+<section class="hero" aria-labelledby="hero-title">
+<div class="hero-grain" aria-hidden="true"></div>
+<div class="hero-inner">
+<div class="hero-copy">
+<div class="eyebrow"><span class="eyebrow-line"></span> 东方智慧 · 当代重读 <span>01 — 81</span></div>
+<div class="hero-en">THE WAY THAT CANNOT BE NAMED</div>
+<h1 id="hero-title">道德经<span>。</span></h1>
+<div class="hero-quote">道可道，非常道。<br>名可名，非常名。</div>
+<p class="hero-description">五千言，八十一章。<br>在快得让人忘记思考的时代，重新阅读两千年前关于<br><strong>自然、平衡与自由</strong>的思辨。</p>
+<div class="hero-buttons"><a class="primary" href="#reading">开始阅读 <span>↗</span></a><a class="secondary" href="#library">漫游八十一章 ↓</a></div>
+</div>
+<div class="hero-art" aria-hidden="true">
+<div class="sun-halo"></div><div class="sun-disc"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+<div class="mountain mountain-back"></div><div class="mountain mountain-mid"></div><div class="mountain mountain-front"></div><div class="waterlines"></div>
+<div class="calligraphy">上善若水 · 水善利万物而不争</div><div class="art-label">观其妙 <small>FIG 001 / 自然</small></div>
+</div>
+<div class="hero-bottom"><span>老子 · 道德经</span><span>下滑 · 入道 ↓</span><span>道经 37 篇 / 德经 44 篇</span></div>
+</div></section>
+<section class="philosophy section-pad" id="philosophy">
+<div class="section-intro reveal"><span class="kicker">I / THE PRINCIPLES</span><p>道，不只是一本书。<br>也是观察世界的另一种方式。</p></div>
+<h2 class="section-heading reveal">以<span>无</span>，见有。</h2>
+<div class="principles">
+<article class="principle reveal"><span class="kicker">01 / 自然</span><div class="principle-symbol">◯</div><h3>道法自然</h3><p>不是放弃行动，而是理解万物自有其运行的方式。</p><button class="theme-jump text-link" data-theme="道与自然">探索相关章节 ↗</button></article>
+<article class="principle reveal"><span class="kicker">02 / 平衡</span><div class="principle-symbol">∿</div><h3>有无相生</h3><p>对立，不一定意味着冲突。互为条件，才构成整体。</p><button class="theme-jump text-link" data-theme="辩证与转化">探索相关章节 ↗</button></article>
+<article class="principle reveal"><span class="kicker">03 / 不争</span><div class="principle-symbol">水</div><h3>上善若水</h3><p>柔软并非软弱。选择低处，依然能通向辽阔。</p><button class="theme-jump text-link" data-theme="柔弱与不争">探索相关章节 ↗</button></article>
+</div></section>
+<section class="interlude"><div class="reveal"><span class="kicker">A MOMENT OF STILLNESS · 第十六章</span><p>致虚极，<span>守静笃。</span></p><small>让内心归于澄明，方能看见万物之复。</small></div></section>
+<section id="library" class="library section-pad">
+<div class="reveal"><span class="kicker">II / THE COLLECTION</span><h2 class="section-heading">八十一章，<br><em>八十一种观照。</em></h2><p class="section-description">从「道可道」到「为而不争」。你可以顺序阅读，也可以循着某个念头，从任意一章开始。</p></div>
+<div class="library-controls"><label class="search-box"><span>⌕</span><input id="chapter-search" type="search" placeholder="搜索章名、原文、译文，如「上善若水」" aria-label="检索章节、原文、译文"><kbd>/</kbd></label><label class="filter-wrap"><span class="sr-only">主题筛选</span><select id="theme-filter"><option value="">全部主题</option></select></label></div>
+<div class="library-meta"><span id="result-count" role="status" aria-live="polite">共 81 章</span><span>点击任意章节，开启阅读</span></div>
+<div class="chapter-grid" id="chapter-grid"></div><p id="no-results" class="no-results" hidden>未找到相关章节，请尝试其他关键词或取消主题筛选。</p>
+</section>
+<section id="reading" class="reading section-pad">
+<div class="reading-heading"><span class="kicker">III / THE READING ROOM</span><h2 class="section-heading">一字一句，<em>慢慢读。</em></h2><p class="section-description">原文与白话意译并置。古文是思想的源头，翻译是通往它的一座桥。</p></div>
+<div class="reading-shell">
+<aside class="sidebar"><div class="side-title">篇章导航 <span id="sidebar-count">01 / 81</span></div><div class="part-switch"><button data-part="dao" id="part-dao" class="active" aria-pressed="true">道经 <small>01—37</small></button><button data-part="de" id="part-de" aria-pressed="false">德经 <small>38—81</small></button></div><div id="chapter-nav" class="chapter-nav" aria-label="章节目录"></div><div class="side-quote">道 <span>闲时读两句，忙时守一念。</span></div></aside>
+<div class="reader-content">
+<div class="reader-toolbar"><div class="view-modes" role="group" aria-label="阅读模式"><button data-mode="parallel" class="active" aria-pressed="true">原文 + 译文</button><button data-mode="original" aria-pressed="false">仅原文</button><button data-mode="translation" aria-pressed="false">仅译文</button></div><div class="font-controls"><button id="font-smaller" aria-label="减小字号">A−</button><button id="font-larger" aria-label="增大字号">A＋</button></div></div>
+<div class="chapter-opening"><div><span class="kicker" id="chapter-part">上篇 · 道经</span><h3 id="chapter-heading">第一章</h3><p id="chapter-title">道可道</p></div><span id="chapter-large" aria-hidden="true">01</span></div>
+<div id="reader-columns" class="reader-columns" data-mode="parallel">
+<article class="pane pane-original"><div class="pane-label">原典 / ORIGINAL TEXT <button class="copy-btn" data-copy="original">复制 ↗</button></div><p id="original-text"></p></article>
+<article class="pane pane-translation"><div class="pane-label">白话意译 / INTERPRETATION <button class="copy-btn" data-copy="translation">复制 ↗</button></div><p id="translation-text"></p></article>
+</div>
+<div class="reader-footer"><div id="reader-tags" class="reader-tags"></div><div class="reader-actions"><button id="bookmark-toggle" aria-pressed="false">☆ 收藏本章</button><button id="copy-link">↗ 复制链接</button></div></div>
+<div class="pager"><button id="prev-chapter"><span>← 上一章</span><strong id="prev-label"></strong></button><button id="next-chapter"><span>下一章 →</span><strong id="next-label"></strong></button></div>
+<p class="disclaimer">编者说明：经文以通行王弼本为阅读参考，使用简体和现代标点。译文系编辑性白话意译，供理解参考，不代表唯一释义或严格校勘本。<a href="https://github.com/1998x-stack/TaoTeChing/blob/main/docs/TEXTUAL-CRITICISM.md" target="_blank" rel="noopener">版本与来源 ↗</a></p>
+</div></div>
+</section>
+</main>
+<footer><div class="footer-message"><span>道</span><p>以古为镜，以静观心。<br><small>道，不远人。</small></p></div><div class="footer-bottom"><span>TAO TE CHING © 2026 · AN OPEN READING EXPERIENCE</span><nav><a href="https://github.com/1998x-stack/TaoTeChing">开源仓库 ↗</a><a href="https://github.com/1998x-stack/TaoTeChing/tree/main/docs">文档 ↗</a><a href="#top">回到顶部 ↑</a></nav></div></footer>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script type="module" src="./app.js"></script>
+</body></html>
