@@ -25,7 +25,7 @@ GitHub Repo → **Settings → Pages → Build and deployment → Source → Git
 push to main
   -> CI: npm test
   -> Pages job: npm test
-  -> assemble dist (index, CSS, JS, chapters, SVG, .nojekyll)
+  -> assemble dist (index, CSS, JS, chapters, passages, 3 sentence-part modules, SVG, .nojekyll)
   -> configure-pages@v5
   -> upload-pages-artifact@v4
   -> deploy-pages@v4
@@ -41,7 +41,7 @@ push to main
 - 页面内容可在手机阅读；
 - 输入关键词「上善若水」结果正确；
 - 打开 #chapter-81，阅读室显示第八十一章；
-- 原文/译文切换正确；
+- 506句的译文初始遮挡、逐句点击可展开，新章节恢复遮挡；
 - 刷新后主题和书签仍保持；
 - 启用减少动画后没有不必要运动。
 

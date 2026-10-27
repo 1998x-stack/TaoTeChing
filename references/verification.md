@@ -19,7 +19,9 @@
 - [ ] Theme filter and no-results case function
 - [ ] #chapter-1 / #chapter-38 / #chapter-81 work on refresh
 - [ ] Prev/next boundaries disable safely
-- [ ] Original, translation and parallel display are correct
+- [ ] Every original sentence appears above exactly its translation control; no parallel columns
+- [ ] All 506 interpretations are concealed until their own button is clicked
+- [ ] Switching chapters resets all translations to hidden
 - [ ] Bookmark, size and light/dark state persist in this browser
 - [ ] No horizontal overflow on mobile
 - [ ] Reduced-motion preference honored

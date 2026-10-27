@@ -16,18 +16,19 @@
 | [ACCESSIBILITY.md](ACCESSIBILITY.md) | 语义、键盘、对比度、动效无障碍 | 设计、开发 |
 | [QA-PLAN.md](QA-PLAN.md) | 内容、功能、性能和验收测试矩阵 | 测试 |
 | [ROADMAP.md](ROADMAP.md) | V1→V2 分阶段里程碑及完成定义 | 全体 |
+| [SENTENCE-READER.md](SENTENCE-READER.md) | 506句对齐、逐句揭晓状态机、键盘和验收 | 产品、前端、编辑 |
 | [PHILOSOPHY-ATLAS.md](PHILOSOPHY-ATLAS.md) | 概念关系与可视化研究方向 | 内容、研究 |
 
 ## 贯穿全项目的四条原则
 
 1. **文本优先：** 动效只服务于阅读，不凌驾于阅读之上。
 2. **底本清晰：** 明确「参考王弼章序的通行简体阅读本」与「严格王弼校勘本」的区别。
-3. **原译就近：** 任何译文都必须可直接返回相应原文；V1 为章级对照，V1.1 计划增加逐句锚点。
+3. **原译逐句：** 当前共有506条原文—译文对，桌面和手机均严格上下排列；用户点击该句后才看到对应的现代意译。
 4. **可验证交付：** 文档中的功能与上线状态必须与代码、CI 和 GitHub Pages 实际状态一致。
 
 ## 工程检查入口
 
-本地执行 npm test。所有静态发布内容来自根目录 index.html、styles.css、app.js、data/chapters.js 与 assets/。Pages 工作流从这些文件重新组装 dist，不发布研究草稿和管理文档。
+本地执行 npm test。所有静态发布内容来自根目录 index.html、styles.css、app.js、data/chapters.js、data/passages.js、data/sentence-parts/ 与 assets/。Pages 工作流从这些文件重新组装 dist，不发布研究草稿和管理文档。
 
 ## 编辑检查入口
 

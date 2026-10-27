@@ -3,7 +3,7 @@
 ## Invariants
 
 - Native HTML/CSS/JS modules, no required npm dependencies.
-- Data is imported only from data/chapters.js; never duplicate 81 chapter text in HTML.
+- Original chapter source comes only from data/chapters.js; data/passages.js pairs its unchanged punctuation-defined source sentences with 506 manually authored translations in data/sentence-parts/. Never duplicate source in HTML.
 - Do not use innerHTML for dynamic chapter or search content; set textContent.
 - Keep root-relative URLs out of assets (use ./ paths) for Pages at /TaoTeChing/.
 - Maintain chapter hash links #chapter-1 .. #chapter-81.
@@ -18,7 +18,7 @@ Ink green #101816, parchment #f4f0e6, warm gold #cbb27c, system Songti-style CJK
 
 ## Product state
 
-Reader controls: original+interpretation, original only, paraphrase only; size; theme; bookmarks; previous and next chapter; source context. Navigation through chapter grid, Dao/De tabs, concepts and keyboard.
+Reader controls: 506 vertical source/translation sentence cards (concealed by default; clicked one-by-one), explicit collapse-all, size, theme, bookmarks, previous and next chapter. Chapter changes re-conceal all translations. Navigation through chapter grid, Dao/De tabs, concepts and keyboard.
 
 ## Testing and publishing
 

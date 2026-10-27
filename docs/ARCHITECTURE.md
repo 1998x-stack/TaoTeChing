@@ -1,48 +1,45 @@
-# Architecture · 技术架构
+# Architecture · 静态网站与逐句阅读
 
-## 总体
+## 架构
 
-本项目为可由任何静态 HTTP 主机提供的单页阅读系统。无服务端运行逻辑、无数据库、无打包依赖。
+无框架、无后端、原生 ES Modules。所有内容在构建时由源码确定，不调用大模型接口，也不需要用户账号。
 
 ~~~text
 Browser
-  ├─ index.html          页面语义骨架 / SEO / 阅读控件
-  ├─ styles.css          Design tokens / CSS landscape / responsive
-  └─ app.js              导航、过滤、展示、交互
-       ├─ data/chapters.js   CHAPTERS[81] + THEMES + byNumber
-       ├─ location.hash     可分享章节路由
-       └─ localStorage      mode / theme / size / bookmarks / last
-                       (浏览器本地，不发送远端)
+ ├─ index.html           结构语义 / 读者控件
+ ├─ styles.css           深墨、宣纸、竖向逐句卡片、减少动态
+ └─ app.js               目录检索、章节导航、单句揭晓、字体、书签
+     ├─ data/chapters.js         CHAPTERS[81] / THEMES / byNumber
+     └─ data/passages.js         PASSAGE_INDEX[81], PASSAGE_COUNT=506
+         ├─ sentence-parts/01-27.js
+         ├─ sentence-parts/28-54.js
+         └─ sentence-parts/55-81.js
 
-GitHub main ─ CI (npm test) ─ Pages Actions ─ dist ─ GitHub Pages CDN
+LocalStorage: theme / size / bookmarks / last (不保存译文展开状态)
+location.hash: #chapter-N
+Github main -> CI (npm test) -> Pages Actions -> dist -> GitHub Pages
 ~~~
 
-## 数据契约
+## 内容层级
 
-CHAPTERS 每项包含 number (integer)、title (string)、theme (string)、original (string)、translation (string)。translation 是现代汉语意译，不冒充严格逐句翻译。数据文件通过原生 ES module 导出。
+data/chapters.js 内 original 是权威于本仓库的**现有原文字符串**；translation 是早期编辑性的整章概览，网站现在不再用它生成逐句阅读区。三个 sentence-parts 文件包含逐句撰写的白话翻译。passages.js 按「。！？；」分割原文并构造每句一条的 {id,chapter,index,original,translation}。
 
-数据单一来源位于 data/chapters.js。不要在页面代码中复制和维护第二份章文。按 number 查询，按 theme 聚类，按词组检索 title / original / translation 等。
+**完整性约束：** 一章原文经过分割、再连接必须与原 original 逐字一致；分句数组和人工译文数组长度必须相等。任何不符都在模块装载 / npm test 时抛错，阻止部署。
 
-## 运行流程
+## 页面状态
 
-1. 浏览器加载 index.html 和 styles.css。
-2. app.js 导入 CHAPTERS 与 THEMES。
-3. 初始化状态时检查哈希深链接，其次读取本地 last 状态。
-4. 渲染章节卡片与当前章原译视图。
-5. 搜索和主题筛选在本地处理 81 条数据；用户输入只影响 textContent 与 filter，不拼接 HTML。
-6. 章节跳转更新 hash；视觉状态与书签以 localStorage 保存。
+每次 renderChapter 都重新生成当前章的句卡。初始 translation.hidden=true，aria-expanded=false。点击独立按钮后才使该句译文可见；再次点击收起。切章或者刷新时不会保留已揭晓的内容。
 
-## 静态托管约束
+“全部收起”按钮可以恢复本章所有译文隐藏，字号变化只更改 CSS variable，**不重建已展开的译文**。
 
-- 使用相对路径 ./app.js / ./data/chapters.js，支持项目子路径 /TaoTeChing/。
-- 本地必须通过 HTTP 服务访问，因为 file:// 会触发 ES module 跨源约束。
-- GitHub Pages 工作流校验后，将指定文件复制到 dist；文档、工作流与脚本不公开到站点路径。
-- .nojekyll 禁用 Jekyll 特殊处理。
+## 搜索与路由
 
-## 安全与隐私
+目录可按题名、原文、编辑意译和主题搜索。章节通过 hash 深链恢复。所有来自经文或搜索的内容通过 textContent 写入，不使用 innerHTML，减少注入风险。
 
-站点无输入回传、无服务端、无 Cookie。动态文本使用 textContent 而不是 innerHTML，外链使用 rel=noopener（需新窗口时）。本地保存的阅读偏好仅用于恢复用户体验，清理浏览器站点数据会清除。
+## Pages 发布
 
-## 扩展接口（计划）
+.github/workflows/pages.yml 将 HTML、CSS、JS、SVG、data/*.js 与 data/sentence-parts/*.js 都复制到 dist。所有 ES Module import 使用相对路径，可在 /TaoTeChing/ 子路径托管。必须先在仓库 Settings / Pages 启用 GitHub Actions 来源，工作流成功不自动代表官网可访问。
 
-后续若支持段级对齐，新增 per-chapter passages 数组，每项包含 passageId、original、translation、sourceRef、uncertainty。现有 original/translation 保留为向后兼容展示视图。
+## 不属于目前实现
+
+详细词级注释、底本差异、专业校勘结论、可追溯多版本影印或经文语义图谱，均属后续阶段。

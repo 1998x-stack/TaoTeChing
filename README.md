@@ -10,7 +10,7 @@
 
 > 道可道，非常道。名可名，非常名。
 >
-> 原文在左，译文在右。让古老的思想，重新成为可以被认真阅读的文本。
+> 一句原文在上，一句白话在下；点击，才看见译文。让古老的思想，重新成为可以被认真阅读的文本。
 
 ## Project at a glance
 
@@ -18,11 +18,11 @@ A static GitHub Pages publication built without a runtime server or third-party 
 
 ### Highlights
 
-- **81 chapters, one canonical dataset:** chapter number, title, thematic taxonomy, original Chinese, and modern Chinese interpretive paraphrase.
-- **Parallel reading:** original text and paraphrase side by side on desktop, stacked on mobile; original-only and translation-only modes.
+- **81 chapters / 506 sentence pairs:** chapter source text remains intact; hand-authored sentence interpretations are versioned separately with deterministic ids and reconstructed-source validation.
+- **Sentence-by-sentence reading:** all 506 sentence-level pairs are vertically aligned on both desktop and mobile. Original text is visible; each modern Chinese interpretation is concealed until that individual sentence is clicked. Changing chapters resets the reveal state.
 - **Navigation:** Dao Jing (chapters 1–37), De Jing (38–81), deep links using #chapter-N, prev/next and keyboard arrows.
 - **Discovery:** full-text keyword search and thematic browsing across six editorial themes.
-- **Personal reading:** saved chapters, last-read chapter, color theme and font size, stored locally in the browser.
+- **Personal reading:** saved chapters, last-read chapter, color theme and font size stored locally; translations do not remain revealed across chapter changes.
 - **Design:** responsive ink-landscape hero, parchment color palette, subtle motion and reduced-motion support.
 - **Publishing:** dependency-free static frontend; GitHub Actions checks and GitHub Pages deploy workflow.
 
@@ -47,6 +47,8 @@ TaoTeChing/
 ├── styles.css                 # Design tokens, ink landscapes, responsive styles
 ├── app.js                     # Search, routing, state and reader interactions
 ├── data/chapters.js           # 81-chapter primary dataset
+├── data/passages.js           # 506 aligned source/translation pairs
+├── data/sentence-parts/      # Hand-authored translation arrays (3 files)
 ├── assets/                    # Favicon and open-graph cover (SVG)
 ├── docs/                      # Product, architecture, design, editorial and QA
 ├── SKILL.md                   # AI/agent-facing editorial workflow and constraints
@@ -54,6 +56,10 @@ TaoTeChing/
 ├── scripts/validate.mjs       # Content and integration sanity checks
 └── .github/workflows/         # CI and GitHub Pages deployment
 ~~~
+
+## Daoist problem-solving Skill
+
+The root [SKILL.md](./SKILL.md) is not merely a website/editorial skill: its main function is to **help people think through real problems using authentic Tao Te Ching wisdom**. It guides an agent to understand a user's dilemma, quote a relevant original verse with chapter citation, explain it in plain modern language, reason about its limits, and suggest grounded action. The style is restrained, reflective and Daoist without claiming supernatural or professional certainty. See [Practical Wisdom](./references/practical-wisdom.md).
 
 ## Engineering decisions
 
@@ -68,15 +74,15 @@ TaoTeChing/
 
 ## Textual integrity
 
-The received text is aligned **in chapter order** with a modern Chinese paraphrase. It is **not yet an authoritative critical edition or a clause-level translation**. The editorial base is the commonly received Wang Bi chapter sequence; simplified glyphs and modern punctuation are used for accessibility. Versions differ: Mawangdui silk manuscripts, Guodian bamboo slips and other witnesses do not share identical readings and ordering. Do not conflate them.
+The received text is aligned into **506 punctuation-defined reading sentences across 81 chapters** with independent editorial Chinese interpretations. It is **not yet an authoritative critical edition or a fully reviewed philological word-by-word translation**. The editorial base is the commonly received Wang Bi chapter sequence; simplified glyphs and modern punctuation are used for accessibility. Versions differ: Mawangdui silk manuscripts, Guodian bamboo slips and other witnesses do not share identical readings and ordering. Do not conflate them.
 
 See [Textual Criticism](./docs/TEXTUAL-CRITICISM.md) for source links, known issues and future collation gates. Original text is public domain; the supplied paraphrases are newly written for this project and **should not be represented as historical translations**.
 
 ## Roadmap
 
-**V1 · Foundation:** complete 81-chapter dataset; reader; search; bookmarks; responsive visual design; documentation; Pages automation.
+**V1 · Foundation:** complete 81-chapter and 506-sentence datasets; click-to-reveal stacked reader; search; bookmarks; responsive visual design; practical-wisdom Skill; documentation; Pages automation.
 
-**V1.1 · Philology:** chapter-by-chapter proofreading against fixed source revisions; variant apparatus; reviewer sign-off; exact original/translation span alignment.
+**V1.1 · Philology:** chapter-by-chapter proofreading against fixed source revisions; variant apparatus; reviewer sign-off and detailed lexical annotations. The 506 sentence-level UI alignment is already implemented.
 
 **V1.2 · Exploration:** concept graph, semantic connections, citation-backed notes, offline reading, exports and optional traditional Chinese display.
 
