@@ -54,7 +54,7 @@ function renderLibrary(){
  const matches=CHAPTERS.filter(ch=>{
   if(state.theme&&state.theme!==ch.theme)return false;
   if(!q)return true;
-  return [ch.number,chapterName(ch.number),ch.title,ch.theme,ch.original,ch.translation].join(" ").toLocaleLowerCase("zh-CN").includes(q);
+  return [ch.number,chapterName(ch.number),ch.title,ch.theme,ch.original,...byChapter(ch.number).map(line=>line.translation)].join(" ").toLocaleLowerCase("zh-CN").includes(q);
  });
  $("result-count").textContent="找到 "+matches.length+" / 81 章";
  $("no-results").hidden=matches.length>0;
@@ -103,6 +103,7 @@ function updateRevealCount(){
 function revealSentence(button,translation){
  const visible=button.getAttribute("aria-expanded")==="true";
  button.setAttribute("aria-expanded",String(!visible));
+ button.setAttribute("aria-label",visible?"点击揭晓第"+button.closest(".sentence-card").dataset.sentenceId+"句译文":"收起第"+button.closest(".sentence-card").dataset.sentenceId+"句译文");
  translation.hidden=visible;
  button.textContent=visible?"轻触见译 ＋":"收起此句译文 −";
  button.closest(".sentence-card").classList.toggle("revealed",!visible);
