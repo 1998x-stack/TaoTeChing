@@ -1,108 +1,110 @@
 # 道德经 · Tao Te Ching
 
-**An immersive, open, source-aware reading experience for the 81 chapters of the Tao Te Ching.**
+> **道可道，非常道。** ——《道德经》第一章
 
-[![CI](https://github.com/1998x-stack/TaoTeChing/actions/workflows/ci.yml/badge.svg)](https://github.com/1998x-stack/TaoTeChing/actions/workflows/ci.yml)
-[![Pages](https://github.com/1998x-stack/TaoTeChing/actions/workflows/pages.yml/badge.svg)](https://github.com/1998x-stack/TaoTeChing/actions/workflows/pages.yml)
-[![License: MIT](https://img.shields.io/badge/code-MIT-c7ac78)](./LICENSE)
+以东方审美设计的《道德经》数字阅读站，同时提供可直接供 **Codex / OpenCode** 使用的「以道观事」AI Skill：引用真实经文，帮助思考现实问题，给出有分寸的建议。
 
-**[GitHub Pages 阅读地址](https://1998x-stack.github.io/TaoTeChing/)** · **[专业文档 / Documentation](./docs/README.md)** · **[内容与版本说明](./docs/TEXTUAL-CRITICISM.md)**
+[**在线阅读**](https://1998x-stack.github.io/TaoTeChing/) · [**AI Skill**](./SKILL.md) · [**专业文档**](./docs/README.md) · [**GitHub Actions**](./actions)
 
-> 道可道，非常道。名可名，非常名。
->
-> 一句原文在上，一句白话在下；点击，才看见译文。让古老的思想，重新成为可以被认真阅读的文本。
+## 主要功能
 
-## Project at a glance
+| 模块 | 功能与实现 |
+| --- | --- |
+| 经典阅读 | **81章、506个逐句对照单元**。古文在上、译文在下；单句点击后才揭晓，切章自动恢复遮挡 |
+| 内容发现 | 章目导航、全文检索、六类主题、支持链接直达特定章节 |
+| 阅读体验 | 墨色 / 宣纸主题、可调字号、书签和上次阅读位置、移动端适配及减少动效 |
+| 以道解题 | [SKILL.md](./SKILL.md) 与 [references/](./references/)：洞察现实矛盾、引用原文与章号、通俗解释并提出行动 |
+| 工程能力 | 原生 ES Modules、无后端与运行时依赖、内容结构校验、GitHub Actions CI 与 Pages |
 
-A static GitHub Pages publication built without a runtime server or third-party UI framework. It brings together all **81 chapters** of the received Tao Te Ching, a clearly labeled **editorial Chinese paraphrase** (白话意译), and an accessible, responsive experience inspired by Chinese ink landscapes and contemporary editorial motion.
+网站中的译文为项目编写的**白话意译**，并非已完成学术校勘的权威译本。古文采用通行八十一章次序、简体及现代标点；详见[版本与校勘](./docs/TEXTUAL-CRITICISM.md)。
 
-### Highlights
+## 一、让 Codex / OpenCode 直接使用本 Skill
 
-- **81 chapters / 506 sentence pairs:** chapter source text remains intact; hand-authored sentence interpretations are versioned separately with deterministic ids and reconstructed-source validation.
-- **Sentence-by-sentence reading:** all 506 sentence-level pairs are vertically aligned on both desktop and mobile. Original text is visible; each modern Chinese interpretation is concealed until that individual sentence is clicked. Changing chapters resets the reveal state.
-- **Navigation:** Dao Jing (chapters 1–37), De Jing (38–81), deep links using #chapter-N, prev/next and keyboard arrows.
-- **Discovery:** full-text keyword search and thematic browsing across six editorial themes.
-- **Personal reading:** saved chapters, last-read chapter, color theme and font size stored locally; translations do not remain revealed across chapter changes.
-- **Design:** responsive ink-landscape hero, parchment color palette, subtle motion and reduced-motion support.
-- **Publishing:** dependency-free static frontend; GitHub Actions checks and GitHub Pages deploy workflow.
+### 方式 A：在 Codex / OpenCode 对话中直接粘贴（最快）
 
-## Quick start
+以下内容适合在**已克隆此仓库的目录**中使用；无需先安装其他工具：
 
-Requirements: a modern browser; Node.js 20+ for validation; Python 3 for the optional local server.
+~~~text
+请阅读当前仓库根目录 SKILL.md，并按需阅读 references/practical-wisdom.md、references/translation-guide.md、data/chapters.js。
+从现在起，把 tao-te-ching-wisdom 作为回答问题的指导 Skill：
+1. 先分析我真实的问题、约束与进退得失，不要机械套格言。
+2. 使用《道德经》恰切的思想解决现实问题，以古朴、清朗、克制而易懂的道家语气作答。
+3. 必须引用可核对的《道德经》原文，并明确章号；紧随白话释义，说明它为何适用于当前处境。
+4. 至少给出一项可执行、可验证的下一步；同时指出经义的适用边界。
+5. 不得编造古文，不得把自创的仿古语句标为老子原文；不得用哲学替代医学、法律、财务等专业事实。
+我的问题是：________
+~~~
+
+### 方式 B：自动发现 Skill（推荐长期使用）
+
+本仓库内置 [\`.agents/skills/tao-te-ching-wisdom/SKILL.md\`](./.agents/skills/tao-te-ching-wisdom/SKILL.md)，同时兼容 Codex 和 OpenCode 的项目级 Skill 扫描。进入仓库启动任一客户端即可按任务自动匹配，亦可显式调用。<br>
+
+~~~bash
+git clone https://github.com/1998x-stack/TaoTeChing.git
+cd TaoTeChing
+
+# 在此目录中启动 Codex 或 OpenCode
+codex
+# 或
+opencode
+~~~
+
+**在 Codex 输入**（支持显式引用 Skill）：
+
+~~~text
+$tao-te-ching-wisdom
+请从《道德经》的角度分析：遇到职业发展与个人自由之间的取舍，我该如何衡量？请引用真实原文与章号，并给具体建议。
+~~~
+
+**在 OpenCode 输入**（明确提示加载项目 Skill）：
+
+~~~text
+请使用当前项目的 tao-te-ching-wisdom Skill（若未自动加载，请读取 .agents/skills/tao-te-ching-wisdom/SKILL.md），以《道德经》风格分析我的问题，引用准确经文与章节，解释并提出可行行动：我在重要项目上过度控制细节，如何调整？
+~~~
+
+### 方式 C：作为全局 Skill 跨仓库使用
+
+~~~bash
+git clone https://github.com/1998x-stack/TaoTeChing.git "$HOME/tao-te-ching-skill"
+mkdir -p "$HOME/.agents/skills"
+ln -s "$HOME/tao-te-ching-skill/.agents/skills/tao-te-ching-wisdom" \
+  "$HOME/.agents/skills/tao-te-ching-wisdom"
+~~~
+
+已存在同名目录时，请先检查，不要直接覆盖。全局路径是 Codex 与 OpenCode 共同支持的 Skill 发现目录。使用新 Skill 若未立即生效，可重启客户端。
+
+[Codex Skills 官方说明](https://learn.chatgpt.com/docs/build-skills) · [OpenCode Skills 官方说明](https://docs.opencode.ai/docs/skills/)
+
+## 二、本地开发与测试
 
 ~~~bash
 git clone https://github.com/1998x-stack/TaoTeChing.git
 cd TaoTeChing
 npm test
-python3 -m http.server 4173
+npm run serve
+# 打开 http://localhost:4173
 ~~~
 
-Visit http://localhost:4173 . Opening index.html directly using file:// is **not** supported because browser ES modules require an HTTP origin.
+需要 Node.js 20+ 和 Python 3（仅本地静态服务）。由于原生 ES Modules 的浏览器安全限制，请通过 HTTP 服务打开，不要直接使用 \`file://\`。
 
-## Repository layout
+| 目录 | 职责 |
+| --- | --- |
+| \`data/chapters.js\`、\`data/passages.js\`、\`data/sentence-parts/\` | 原文与506条句级意译、无损重组与索引 |
+| \`index.html\`、\`app.js\`、\`styles.css\` | 静态 UI、逐句点击、交互与动效 |
+| \`SKILL.md\`、\`references/\`、\`.agents/skills/\` | AI 行为规范、证据与客户端发现入口 |
+| \`docs/\`、\`scripts/\`、\`.github/workflows/\` | 设计/内容规范、验证、CI 和 Pages |
 
-~~~text
-TaoTeChing/
-├── index.html                 # Landing page, catalogue and reader semantics
-├── styles.css                 # Design tokens, ink landscapes, responsive styles
-├── app.js                     # Search, routing, state and reader interactions
-├── data/chapters.js           # 81-chapter primary dataset
-├── data/passages.js           # 506 aligned source/translation pairs
-├── data/sentence-parts/      # Hand-authored translation arrays (3 files)
-├── assets/                    # Favicon and open-graph cover (SVG)
-├── docs/                      # Product, architecture, design, editorial and QA
-├── SKILL.md                   # AI/agent-facing editorial workflow and constraints
-├── references/               # Skill reference guides and verification checklist
-├── scripts/validate.mjs       # Content and integration sanity checks
-└── .github/workflows/         # CI and GitHub Pages deployment
-~~~
+## 三、质量、溯源与边界
 
-## Daoist problem-solving Skill
+- **自动校验：** 81章编号、506个句对、回拼原文不丢字、关键 DOM 交互约束；\`npm test\`。
+- **人文校勘：** 需逐字复核通行王弼阅读本及异文；自动测试不证明翻译唯一正确。
+- **Skill 的目标：** 用经典**启发非暴力的现实决策**，而不是把古书当作现代事实依据。
+- **数据保护：** 书签与字号只保留在当前浏览器，本项目无登录和阅读行为上传。
 
-The root [SKILL.md](./SKILL.md) is not merely a website/editorial skill: its main function is to **help people think through real problems using authentic Tao Te Ching wisdom**. It guides an agent to understand a user's dilemma, quote a relevant original verse with chapter citation, explain it in plain modern language, reason about its limits, and suggest grounded action. The style is restrained, reflective and Daoist without claiming supernatural or professional certainty. See [Practical Wisdom](./references/practical-wisdom.md).
+[内容与版本](./docs/TEXTUAL-CRITICISM.md) · [逐句交互](./docs/SENTENCE-READER.md) · [设计系统](./docs/DESIGN-SYSTEM.md) · [发布说明](./docs/DEPLOYMENT.md) · [贡献指南](./CONTRIBUTING.md)
 
-## Engineering decisions
-
-| Concern | Decision | Why |
-| --- | --- | --- |
-| Site architecture | HTML + CSS + native ES modules | Zero bundle, easy Pages deployment, inspectable source |
-| Content | Versioned JS dataset | Deterministic, offline after site load, easy validation |
-| Client state | Browser localStorage | No account, no collection of reading behavior |
-| UI security | DOM textContent for corpus and user input | Avoid unsafe HTML injection |
-| Hosting | GitHub Pages via Actions | Free static publication and reproducible deploy |
-| Accessibility | Native controls, keyboard, reduced motion | Readability takes precedence over effects |
-
-## Textual integrity
-
-The received text is aligned into **506 punctuation-defined reading sentences across 81 chapters** with independent editorial Chinese interpretations. It is **not yet an authoritative critical edition or a fully reviewed philological word-by-word translation**. The editorial base is the commonly received Wang Bi chapter sequence; simplified glyphs and modern punctuation are used for accessibility. Versions differ: Mawangdui silk manuscripts, Guodian bamboo slips and other witnesses do not share identical readings and ordering. Do not conflate them.
-
-See [Textual Criticism](./docs/TEXTUAL-CRITICISM.md) for source links, known issues and future collation gates. Original text is public domain; the supplied paraphrases are newly written for this project and **should not be represented as historical translations**.
-
-## Roadmap
-
-**V1 · Foundation:** complete 81-chapter and 506-sentence datasets; click-to-reveal stacked reader; search; bookmarks; responsive visual design; practical-wisdom Skill; documentation; Pages automation.
-
-**V1.1 · Philology:** chapter-by-chapter proofreading against fixed source revisions; variant apparatus; reviewer sign-off and detailed lexical annotations. The 506 sentence-level UI alignment is already implemented.
-
-**V1.2 · Exploration:** concept graph, semantic connections, citation-backed notes, offline reading, exports and optional traditional Chinese display.
-
-Track milestones in [docs/ROADMAP.md](./docs/ROADMAP.md).
-
-## Publishing
-
-Push to main to run CI and Pages deployment. A GitHub Pages Actions deployment has succeeded; direct end-user browser access should still be independently checked. If creating a new fork, activate Settings → Pages → Build and deployment → Source: GitHub Actions before the first deployment. See [Deployment Runbook](./docs/DEPLOYMENT.md) for full instructions and troubleshooting.
-
-## Contributing
-
-Read [CONTRIBUTING.md](./CONTRIBUTING.md), [Design System](./docs/DESIGN-SYSTEM.md), and [Textual Criticism](./docs/TEXTUAL-CRITICISM.md) before editing chapters. All changes to classical text require a documented edition/source and careful human review.
-
-## License and attribution
-
-- Source code: [MIT](./LICENSE).
-- Classical Tao Te Ching: public domain.
-- Editorial paraphrases and interpretive content: see [CONTENT-LICENSE.md](./CONTENT-LICENSE.md); appropriate attribution is required.
-- Reference transcription and critical context: [Chinese Wikisource — Wang Bi](https://zh.wikisource.org/wiki/道德經_(王弼本)) and the sources listed in the textual-criticism document.
+代码采用 [MIT](./LICENSE)；古代经文为公有领域，现代编辑性译文与注释见[内容授权说明](./CONTENT-LICENSE.md)。
 
 ---
 
-**以古为镜，以静观心。**
+**知人者智，自知者明。** ——《道德经》第三十三章
