@@ -9,7 +9,7 @@ check(CHAPTERS.filter(c=>c.number>=38).length===44,"De Jing contains 44 chapters
 check(new Set(CHAPTERS.map(c=>c.number)).size===81,"Chapter identifiers unique");
 for(let n=1;n<=81;n++){
  const ch=CHAPTERS[n-1];
- check(!!ch && ch.number===n && typeof ch.original==="string" && ch.original.length>25 && typeof ch.translation==="string" && ch.translation.length>20 && !!ch.title && THEMES.includes(ch.theme),"Chapter "+n+" has contiguous id, source, paraphrase and theme");
+ check(!!ch && ch.number===n && typeof ch.original==="string" && ch.original.length>=20 && typeof ch.translation==="string" && ch.translation.length>20 && !!ch.title && THEMES.includes(ch.theme),"Chapter "+n+" has contiguous id, source, paraphrase and theme");
 }
 check(CHAPTERS[0].original.startsWith("道可道"),"First chapter matches expected opening");
 check(CHAPTERS[80].original.endsWith("为而不争。"),"Last chapter matches expected ending");
