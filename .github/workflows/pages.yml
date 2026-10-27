@@ -26,9 +26,10 @@ jobs:
         run: npm test
       - name: Assemble public directory
         run: |
-          mkdir -p dist/data dist/assets
+          mkdir -p dist/data/sentence-parts dist/assets
           cp index.html styles.css app.js .nojekyll dist/
-          cp data/chapters.js dist/data/
+          cp data/*.js dist/data/
+          cp data/sentence-parts/*.js dist/data/sentence-parts/
           cp assets/*.svg dist/assets/
       - name: Configure Pages
         uses: actions/configure-pages@v5
