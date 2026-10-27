@@ -2,7 +2,7 @@
 
 ## 自动化（当前）
 
-入口：npm test → node --check app.js / data/chapters.js + scripts/validate.mjs。
+入口：npm test → node --check app.js / data/chapters.js + scripts/validate.mjs（自动导入 data/passages.js 并校验506句）。
 
 覆盖范围：
 - 共 81 章，编号 1..81 唯一连续；

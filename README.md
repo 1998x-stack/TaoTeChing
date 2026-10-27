@@ -6,7 +6,7 @@
 [![Pages](https://github.com/1998x-stack/TaoTeChing/actions/workflows/pages.yml/badge.svg)](https://github.com/1998x-stack/TaoTeChing/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/code-MIT-c7ac78)](./LICENSE)
 
-**[预定阅读网址（Pages 需先启用）](https://1998x-stack.github.io/TaoTeChing/)** · **[专业文档 / Documentation](./docs/README.md)** · **[内容与版本说明](./docs/TEXTUAL-CRITICISM.md)**
+**[GitHub Pages 阅读地址](https://1998x-stack.github.io/TaoTeChing/)** · **[专业文档 / Documentation](./docs/README.md)** · **[内容与版本说明](./docs/TEXTUAL-CRITICISM.md)**
 
 > 道可道，非常道。名可名，非常名。
 >
@@ -90,7 +90,7 @@ Track milestones in [docs/ROADMAP.md](./docs/ROADMAP.md).
 
 ## Publishing
 
-Push to main to run CI and Pages deployment. **First-time activation requires the repository administrator to select Settings → Pages → Build and deployment → Source: GitHub Actions.** Workflow presence alone does not prove the site is live. See [Deployment Runbook](./docs/DEPLOYMENT.md) for full instructions and troubleshooting.
+Push to main to run CI and Pages deployment. A GitHub Pages Actions deployment has succeeded; direct end-user browser access should still be independently checked. If creating a new fork, activate Settings → Pages → Build and deployment → Source: GitHub Actions before the first deployment. See [Deployment Runbook](./docs/DEPLOYMENT.md) for full instructions and troubleshooting.
 
 ## Contributing
 

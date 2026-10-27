@@ -9,7 +9,8 @@
 - [x] README / CONTRIBUTING / 许可证说明
 - [x] CI 和 Pages 的声明式 workflow
 - [x] 已确认 CI 全部通过
-- [ ] 网站实际可访问（需启用仓库 GitHub Pages）
+- [x] GitHub Pages Actions 已至少有一次成功部署
+- [ ] 直接通过外部浏览器独立验收公开站点
 
 **验收：** 文件齐全，npm test 通过，GitHub Actions 的结果为 success。
 
