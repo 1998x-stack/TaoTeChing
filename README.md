@@ -4,7 +4,7 @@
 
 以东方审美设计的《道德经》数字阅读站，同时提供可直接供 **Codex / OpenCode** 使用的「以道观事」AI Skill：引用真实经文，帮助思考现实问题，给出有分寸的建议。
 
-[**在线阅读**](https://1998x-stack.github.io/TaoTeChing/) · [**AI Skill**](./SKILL.md) · [**专业文档**](./docs/README.md) · [**GitHub Actions**](./actions)
+[**在线阅读**](https://1998x-stack.github.io/TaoTeChing/) · [**AI Skill**](./SKILL.md) · [**专业文档**](./docs/README.md) · [**GitHub Actions**](https://github.com/1998x-stack/TaoTeChing/actions)
 
 ## 主要功能
 
@@ -37,7 +37,7 @@
 
 ### 方式 B：自动发现 Skill（推荐长期使用）
 
-本仓库内置 [\`.agents/skills/tao-te-ching-wisdom/SKILL.md\`](./.agents/skills/tao-te-ching-wisdom/SKILL.md)，同时兼容 Codex 和 OpenCode 的项目级 Skill 扫描。进入仓库启动任一客户端即可按任务自动匹配，亦可显式调用。<br>
+本仓库内置 [`.agents/skills/tao-te-ching-wisdom/SKILL.md`](./.agents/skills/tao-te-ching-wisdom/SKILL.md)，同时兼容 Codex 和 OpenCode 的项目级 Skill 扫描。进入仓库启动任一客户端即可按任务自动匹配，亦可显式调用。
 
 ~~~bash
 git clone https://github.com/1998x-stack/TaoTeChing.git
@@ -85,18 +85,18 @@ npm run serve
 # 打开 http://localhost:4173
 ~~~
 
-需要 Node.js 20+ 和 Python 3（仅本地静态服务）。由于原生 ES Modules 的浏览器安全限制，请通过 HTTP 服务打开，不要直接使用 \`file://\`。
+需要 Node.js 20+ 和 Python 3（仅本地静态服务）。由于原生 ES Modules 的浏览器安全限制，请通过 HTTP 服务打开，不要直接使用 `file://`。
 
 | 目录 | 职责 |
 | --- | --- |
-| \`data/chapters.js\`、\`data/passages.js\`、\`data/sentence-parts/\` | 原文与506条句级意译、无损重组与索引 |
-| \`index.html\`、\`app.js\`、\`styles.css\` | 静态 UI、逐句点击、交互与动效 |
-| \`SKILL.md\`、\`references/\`、\`.agents/skills/\` | AI 行为规范、证据与客户端发现入口 |
-| \`docs/\`、\`scripts/\`、\`.github/workflows/\` | 设计/内容规范、验证、CI 和 Pages |
+| `data/chapters.js`、`data/passages.js`、`data/sentence-parts/` | 原文与506条句级意译、无损重组与索引 |
+| `index.html`、`app.js`、`styles.css` | 静态 UI、逐句点击、交互与动效 |
+| `SKILL.md`、`references/`、`.agents/skills/` | AI 行为规范、证据与客户端发现入口 |
+| `docs/`、`scripts/`、`.github/workflows/` | 设计/内容规范、验证、CI 和 Pages |
 
 ## 三、质量、溯源与边界
 
-- **自动校验：** 81章编号、506个句对、回拼原文不丢字、关键 DOM 交互约束；\`npm test\`。
+- **自动校验：** 81章编号、506个句对、回拼原文不丢字、关键 DOM 交互约束；`npm test`。
 - **人文校勘：** 需逐字复核通行王弼阅读本及异文；自动测试不证明翻译唯一正确。
 - **Skill 的目标：** 用经典**启发非暴力的现实决策**，而不是把古书当作现代事实依据。
 - **数据保护：** 书签与字号只保留在当前浏览器，本项目无登录和阅读行为上传。
